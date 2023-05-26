@@ -1,6 +1,6 @@
 {
     "name": "zaghloul-soft/laravel-authorization",
-    "description": "Highly performant simple scalable dynamic database-query-optimized laravel authorization package",
+    "description": "Highly performant simple scalable dynamic database-query-optimized laravel authorization package.",
     "type": "library",
     "license": "MIT",
     "autoload": {
