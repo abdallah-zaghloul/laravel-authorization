@@ -1,0 +1,29 @@
+{
+    "name": "zaghloul-soft/laravel-authorization",
+    "description": "Highly performant simple scalable dynamic database-query-optimized laravel authorization package.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ZaghloulSoft\\LaravelAuthorization\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "abdallah-zaghloul",
+            "email": "3bdallahzaghloul@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ZaghloulSoft\\LaravelAuthorization\\AuthorizationServiceProvider"
+            ],
+            "aliases": {
+                "Role": "ZaghloulSoft\\LaravelAuthorization\\Facades\\Role"
+            }
+        }
+    }
+}
