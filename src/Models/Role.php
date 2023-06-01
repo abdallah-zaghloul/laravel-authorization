@@ -6,6 +6,7 @@ namespace ZaghloulSoft\LaravelAuthorization\Models;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Role extends Model
 {
@@ -37,7 +38,7 @@ class Role extends Model
      * @var string[]
      */
     protected $fillable = [
-        'type',
+        'guard',
         'name',
         'moduled_permissions',
     ];
@@ -54,5 +55,18 @@ class Role extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @param $query
+     * @param Collection $columns
+     * @param Collection $dates
+     * @return mixed
+     */
+    public function scopeSearch($query, Collection $columns, Collection $dates)
+    {
+        $columns->whenNotEmpty(fn(Collection $columns) => $columns->each(function($value,$column) use($query) {$query->where($column,"like","%$value%");}));
+        $dates->whenNotEmpty(fn(Collection $dates) => $dates->each(function($value,$column) use($query) {$query->whereDate($column, '=', $value);}));
+        return $query;
     }
 }
