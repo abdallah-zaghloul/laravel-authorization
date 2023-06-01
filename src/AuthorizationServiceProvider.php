@@ -30,7 +30,7 @@ class AuthorizationServiceProvider extends ServiceProvider
             __DIR__."/messages/".($messages = "laravel-authorization.php") => resource_path("lang/en/$messages"),
             __DIR__."/Middleware/".($middleware = "LaravelAuthorization.php") => app_path("Http/Middleware/$middleware"),
             __DIR__."/Controllers/".($controller = "RolesController.php") => app_path("Http/Controllers/$controller"),
-            __DIR__."/routes/roles.php".($route = "roles.php") => base_path("route/$route"),
+            __DIR__."/routes/".($route = "roles.php") => base_path("route/$route"),
         ],['config','migrations','seeders','messages','middlewares','controllers','routes']);
 
     }
