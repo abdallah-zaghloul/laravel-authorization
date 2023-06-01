@@ -4,7 +4,7 @@ namespace ZaghloulSoft\LaravelAuthorization\database\seeders;
 use Illuminate\Database\Seeder;
 use ZaghloulSoft\LaravelAuthorization\Facades\Role;
 
-class SuperRoleSeeder extends Seeder
+class RolesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class SuperRoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::seedSuperRole();
+        Role::seed();
     }
 }

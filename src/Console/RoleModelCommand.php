@@ -7,14 +7,14 @@
 namespace ZaghloulSoft\LaravelAuthorization\Console;
 use Illuminate\Console\GeneratorCommand;
 
-class MakeRoleModelCommand extends GeneratorCommand
+class RoleModelCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:role {name=Role} --force=false';
+    protected $signature = 'role:model {name=Role} --force=false';
 
     /**
      * The console command description.
