@@ -19,8 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ZaghloulSoft\\LaravelAuthorization\\AuthorizationServiceProvider",
-                "ZaghloulSoft\\LaravelAuthorization\\Facades\\Role"
+                "ZaghloulSoft\\LaravelAuthorization\\AuthorizationServiceProvider"
             ],
             "aliases": {
                 "Role": "ZaghloulSoft\\LaravelAuthorization\\Facades\\Role"
