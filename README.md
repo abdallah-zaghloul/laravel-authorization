@@ -1,33 +1,31 @@
-<pre>
+# laravel-authorization <br>
+Highly performant simple scalable dynamic database-query-optimized laravel authorization package <br>
 
-# laravel-authorization
-Highly performant simple scalable dynamic database-query-optimized laravel authorization package
-
-# Install
-composer require zaghloul-soft/laravel-authorization
-php artisan role:model
-php artisan vendor:publish --provider="ZaghloulSoft\LaravelAuthorization\AuthorizationServiceProvider"
+# Install <br>
+composer require zaghloul-soft/laravel-authorization <br>
+php artisan role:model <br>
+php artisan vendor:publish --provider="ZaghloulSoft\LaravelAuthorization\AuthorizationServiceProvider" <br>
 
 
-# Commands
-- publish Role Model
-php artisan role:model
+# Commands <br>
+- publish Role Model <br>
+php artisan role:model <br>
+<br>
+- link role to another model <br>
+php artisan role:relation ModelName <br>
+<br>
+- seed roles <br>
+php artisan role:seed <br>
+<br>
+- publish all files (config,migrations,route,controller,middleware) <br>
+<br>
+php artisan vendor:publish --provider="ZaghloulSoft\LaravelAuthorization\AuthorizationServiceProvider" <br>
 
-- link role to another model
-php artisan role:relation ModelName
+- publish some files by tages <br>
+php artisan vendor:publish --tag=role-config <br>
+php artisan vendor:publish --tag=role-migrations <br>
+php artisan vendor:publish --tag=role-messages <br>
+php artisan vendor:publish --tag=role-middlewares <br>
+php artisan vendor:publish --tag=role-controllers <br>
+php artisan vendor:publish --tag=role-routes <br>
 
-- seed roles
-php artisan role:seed
-
-- publish all files (config,migrations,route,controller,middleware)
-php artisan vendor:publish --provider="ZaghloulSoft\LaravelAuthorization\AuthorizationServiceProvider"
-
-- publish some files by tages
-php artisan vendor:publish --tag=role-config
-php artisan vendor:publish --tag=role-migrations
-php artisan vendor:publish --tag=role-messages
-php artisan vendor:publish --tag=role-middlewares
-php artisan vendor:publish --tag=role-controllers
-php artisan vendor:publish --tag=role-routes
-
-</pre>
