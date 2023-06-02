@@ -1,3 +1,5 @@
+<pre>
+
 # laravel-authorization
 Highly performant simple scalable dynamic database-query-optimized laravel authorization package
 
@@ -28,3 +30,4 @@ php artisan vendor:publish --tag=role-middlewares
 php artisan vendor:publish --tag=role-controllers
 php artisan vendor:publish --tag=role-routes
 
+</pre>
