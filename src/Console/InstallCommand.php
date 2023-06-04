@@ -44,9 +44,9 @@ class InstallCommand extends Command
     {
         Artisan::call('config:cache');
         Artisan::call('role:model');
-        Artisan::call("vendor:publish --tag=\"".static::$publishes->except('role-config')->keys()->implode('|'));
-        Artisan::call("vendor:publish --tag=\"role-config\"");
+        Artisan::call("vendor:publish --tag=\"".static::$publishes->keys()->implode('|'));
         Artisan::call('migrate');
+        Artisan::call('config:cache');
 
         $publishFiles = static::getPublishFiles();
         $this->info("the following files has been published :"
