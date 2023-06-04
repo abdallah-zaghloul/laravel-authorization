@@ -45,7 +45,7 @@ class InstallCommand extends Command
         Artisan::call("config:cache");
         Artisan::call("migrate");
         Artisan::call("role:model");
-        Artisan::call("vendor:publish --tag=\"".static::$publishes->except('role-config')->keys()->implode('|'));
+        Artisan::call("vendor:publish --tag=\"".static::$publishes->except('role-config')->keys()->implode('|')."\"");
         Artisan::call("migrate");
         Artisan::call("vendor:publish --tag=\"role-config\"");
         Artisan::call("config:cache");
