@@ -11,6 +11,7 @@ return [
   "show" => "Role",
   "update" => "Role updated successfully",
   "assign" => "Role assigned successfully",
+  "unLinked" => "Current guard is not linked to any role before .. please link it",
   "delete" => "Role deleted successfully",
 
     /* updateRoleRequest */

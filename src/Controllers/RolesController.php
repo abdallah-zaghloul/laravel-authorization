@@ -100,6 +100,7 @@ class RolesController extends Controller
     public function assign(AssignRoleRequest $request, $id)
     {
         $assign = Role::assign($request->guardTable,$request->guardPrimaryKeyColumn,$request->input('guardPrimaryKey'),$id);
+        !$assign and $this->error(trans('laravel-authorization.unLinked'),$this->statusCodeBadRequest);
         return $this->data(trans('laravel-authorization.assign'), ['role'=> $request->role,'assign'=> $assign]);
     }
 
