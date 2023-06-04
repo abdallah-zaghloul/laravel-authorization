@@ -38,7 +38,8 @@ class AuthorizationServiceProvider extends ServiceProvider
             __DIR__."/Middleware/".($middleware = "LaravelAuthorization.php") => app_path("Http/Middleware/$middleware"),
             __DIR__."/Controllers/".($controller = "RolesController.php") => app_path("Http/Controllers/$controller"),
             __DIR__."/routes/".($route = "roles.php") => base_path("routes/$route"),
-        ],['role-config','role-migrations','role-messages','role-middlewares','role-controllers','role-routes']);
+            __DIR__."/Services/" => app_path("Services"),
+        ],['role-config','role-migrations','role-messages','role-middlewares','role-controllers','role-routes','role-services']);
 
         RoleFacade::validateConfig();
     }

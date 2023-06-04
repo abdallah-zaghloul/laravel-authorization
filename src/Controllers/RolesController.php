@@ -6,14 +6,17 @@ namespace ZaghloulSoft\LaravelAuthorization\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use ZaghloulSoft\LaravelAuthorization\Models\Role as RoleModel;
 use ZaghloulSoft\LaravelAuthorization\Facades\Role;
 use ZaghloulSoft\LaravelAuthorization\Requests\AssignRoleRequest;
 use ZaghloulSoft\LaravelAuthorization\Requests\CreateRoleRequest;
 use ZaghloulSoft\LaravelAuthorization\Requests\IndexRolesRequest;
 use ZaghloulSoft\LaravelAuthorization\Requests\UpdateRoleRequest;
+use ZaghloulSoft\LaravelAuthorization\Services\AssignRoleService;
+use ZaghloulSoft\LaravelAuthorization\Services\CreateRoleService;
+use ZaghloulSoft\LaravelAuthorization\Services\DeleteRoleService;
+use ZaghloulSoft\LaravelAuthorization\Services\indexRolesService;
+use ZaghloulSoft\LaravelAuthorization\Services\ShowRoleService;
+use ZaghloulSoft\LaravelAuthorization\Services\UpdateRoleService;
 use ZaghloulSoft\LaravelAuthorization\Traits\Response;
 
 class RolesController extends Controller
@@ -22,14 +25,15 @@ class RolesController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @param IndexRolesRequest $request
+     * @param indexRolesService $service
+     * @return JsonResponse
      */
-    public function index(IndexRolesRequest $request)
+    public function index(IndexRolesRequest $request, IndexRolesService $service)
     {
-        $roles = RoleModel::search($request->columns,$request->dates)->{$request->selectedFetchMethod['name']}(...$request->selectedFetchMethod['args']);
+        $roles = $service->execute($request);
         return $this->data(trans('laravel-authorization.index'),compact('roles'));
     }
-
 
     /**
      * Display a listing of the resource.
@@ -56,22 +60,24 @@ class RolesController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param CreateRoleRequest $request
+     * @param CreateRoleService $service
      * @return JsonResponse
      */
-
-    public function create(CreateRoleRequest $request)
+    public function create(CreateRoleRequest $request, CreateRoleService $service)
     {
-        $role = RoleModel::create($request->validated());
+        $role = $service->execute($request);
         return $this->data(trans('laravel-authorization.create'),compact('role'));
     }
 
     /**
      * Display the specified resource.
-     *
+     * @param
+     * @param ShowRoleService $service
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show($id , ShowRoleService $service)
     {
-        $role = RoleModel::find($id);
+        $role = $service->execute($id);
         return $this->data(trans('laravel-authorization.show'),compact('role'));
     }
 
@@ -80,14 +86,13 @@ class RolesController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateRoleRequest $request
-     * @param $id
+     * @param UpdateRoleService $service
      * @return JsonResponse
      */
-    public function update(UpdateRoleRequest $request, $id)
+    public function update(UpdateRoleRequest $request, UpdateRoleService $service)
     {
-        $request->role->update($request->validated());
-        Role::seedMissingGuardsModuledPermissions();
-        return $this->data(trans('laravel-authorization.update'), ['role'=> $request->role]);
+        $role = $service->execute($request);
+        return $this->data(trans('laravel-authorization.update'), compact('role'));
     }
 
     /**
@@ -95,21 +100,24 @@ class RolesController extends Controller
      *
      * @param AssignRoleRequest $request
      * @param $id
+     * @param AssignRoleService $service
      * @return JsonResponse
      */
-    public function assign(AssignRoleRequest $request, $id)
+    public function assign(AssignRoleRequest $request, $id, AssignRoleService $service)
     {
-        $assign = Role::assign($request->guardTable,$request->guardPrimaryKeyColumn,$request->input('guardPrimaryKey'),$id);
-        return $this->data(trans('laravel-authorization.assign'), ['role'=> $request->role,'assign'=> $assign]);
+        $data = $service->execute($request,$id);
+        return $this->data(trans('laravel-authorization.assign'), $data);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param
+     * @param DeleteRoleService $service
+     * @return JsonResponse
      */
-    public function delete($id)
+    public function delete($id, DeleteRoleService $service)
     {
-        $delete = (bool) RoleModel::where('name','!=', Role::superRoleName())->whereKey($id)->delete();
-        Role::seedMissingGuardsModuledPermissions();
+        $delete = $service->execute($id);
         return $this->data(trans('laravel-authorization.delete'),compact('delete'));
     }
 }
