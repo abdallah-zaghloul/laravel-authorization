@@ -72,6 +72,7 @@ class ToggleRelationCommand extends GeneratorCommand
         $this->publishMigrationFile();
         $this->publishRoleModelFile();
         $this->publishModelFile();
+        $this->confirm('please check created migration file if want change relation onDelete($action) then migrate .. ok ?',true);
     }
 
     public function unlinkRelation()
