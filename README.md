@@ -3,21 +3,16 @@ Highly performant simple scalable dynamic database-query-optimized laravel autho
 
 # Install <br>
 composer require zaghloul-soft/laravel-authorization <br>
-php artisan role:model <br>
-php artisan vendor:publish --provider="ZaghloulSoft\LaravelAuthorization\AuthorizationServiceProvider" <br>
+php artisan role:install <br>
+
+# Link Relation <br>
+php artisan role:relation $modelName <br>
+
+# Seed Roles <br>
+php artisan role:seed
 
 
-# Commands <br>
-
-<br>
-* publish Role Model <br>
-php artisan role:model <br>
-<br>
-* link role to another model <br>
-php artisan role:relation ModelName <br>
-<br>
-* seed roles <br>
-php artisan role:seed <br>
+# Other Manual Commands <br>
 <br>
 * publish all files (config,migrations,route,controller,middleware) <br>
 php artisan vendor:publish --provider="ZaghloulSoft\LaravelAuthorization\AuthorizationServiceProvider" <br>
