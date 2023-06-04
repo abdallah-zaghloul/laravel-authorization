@@ -1,11 +1,12 @@
-<?php /** @noinspection PhpUndefinedMethodInspection */
-
+<?php
+/** @noinspection PhpUndefinedMethodInspection */
 /** @noinspection PhpLanguageLevelInspection */
 
 namespace ZaghloulSoft\LaravelAuthorization;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Throwable;
+use ZaghloulSoft\LaravelAuthorization\Console\InstallCommand;
 use ZaghloulSoft\LaravelAuthorization\Console\RoleSeederCommand;
 use ZaghloulSoft\LaravelAuthorization\Console\ToggleRelationCommand;
 use ZaghloulSoft\LaravelAuthorization\Console\RoleModelCommand;
@@ -29,17 +30,10 @@ class AuthorizationServiceProvider extends ServiceProvider
             RoleModelCommand::class,
             ToggleRelationCommand::class,
             RoleSeederCommand::class,
+            InstallCommand::class,
         ]);
 
-        $this->publishes([
-            __DIR__."/config/".($config = "laravel-authorization.php") => config_path($config),
-            __DIR__."/database/migrations/".($migration = "2015_03_13_163576_create_roles_table.php") => database_path("migrations/$migration"),
-            __DIR__."/messages/".($messages = "laravel-authorization.php") => resource_path("lang/en/$messages"),
-            __DIR__."/Middleware/".($middleware = "LaravelAuthorization.php") => app_path("Http/Middleware/$middleware"),
-            __DIR__."/Controllers/".($controller = "RolesController.php") => app_path("Http/Controllers/$controller"),
-            __DIR__."/routes/".($route = "roles.php") => base_path("routes/$route"),
-        ],['role-config','role-migrations','role-messages','role-middlewares','role-controllers','role-routes']);
-
+        $this->publishes(InstallCommand::getPublishFiles()->all() , InstallCommand::getPublishes()->keys()->all());
         RoleFacade::validateConfig();
     }
 
@@ -48,5 +42,4 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->app->bind('Role',fn() => app(Role::class));
         AliasLoader::getInstance()->alias('Role', RoleFacade::class);
     }
-
 }
