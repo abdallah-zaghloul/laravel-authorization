@@ -42,12 +42,13 @@ class InstallCommand extends Command
 
     public function handle()
     {
-        Artisan::call('config:cache');
-        Artisan::call('migrate');
-        Artisan::call('role:model');
-        Artisan::call("vendor:publish --tag=\"".static::$publishes->keys()->implode('|'));
-        Artisan::call('config:cache');
-        Artisan::call('migrate');
+        Artisan::call("config:cache");
+        Artisan::call("migrate");
+        Artisan::call("role:model");
+        Artisan::call("vendor:publish --tag=\"".static::$publishes->except('role-config')->keys()->implode('|'));
+        Artisan::call("migrate");
+        Artisan::call("vendor:publish --tag=\"role-config\"");
+        Artisan::call("config:cache");
 
         $publishFiles = static::getPublishFiles();
         $this->info("the following files has been published :"
