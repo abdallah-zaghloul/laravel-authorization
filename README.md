@@ -25,3 +25,4 @@ php artisan vendor:publish --tag=role-middlewares <br>
 php artisan vendor:publish --tag=role-controllers <br>
 php artisan vendor:publish --tag=role-routes <br>
 
+new
